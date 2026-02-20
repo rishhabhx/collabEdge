@@ -1,0 +1,393 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxGraphModel dx="1422" dy="762" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" math="0" shadow="0">
+  <root>
+    <mxCell id="0" />
+    <mxCell id="1" parent="0" />
+
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <!-- TITLE -->
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <mxCell id="title" value="&lt;b&gt;&lt;font style=&quot;font-size: 20px;&quot;&gt;CollabEdge — DA2 Software Architecture Diagram&lt;/font&gt;&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size: 11px; color: #64748B;&quot;&gt;Layered · Client-Server · Event-Driven  |  Design Principles: Abstraction · Modularity · Cohesion · Low Coupling&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Arial;" vertex="1" parent="1">
+      <mxGeometry x="400" y="20" width="860" height="50" as="geometry" />
+    </mxCell>
+
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <!-- NOTE 1 — DESIGN PRINCIPLES (top-left) -->
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <mxCell id="note1_bg" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFBEB;strokeColor=#CA8A04;strokeWidth=2;" vertex="1" parent="1">
+      <mxGeometry x="20" y="80" width="230" height="230" as="geometry" />
+    </mxCell>
+    <mxCell id="note1" value="&lt;b&gt;Design Principles Applied&lt;/b&gt;&lt;hr/&gt;&lt;b&gt;Abstraction:&lt;/b&gt; Every service/hook hides its implementation. Canvas, WebSocket, Storage all behind clean facades.&lt;br/&gt;&lt;br/&gt;&lt;b&gt;Modularity:&lt;/b&gt; 3 independent deployable services. Frontend split by feature folder.&lt;br/&gt;&lt;br/&gt;&lt;b&gt;Cohesion:&lt;/b&gt; SceneService only touches scenes. RoomService only touches rooms.&lt;br/&gt;&lt;br/&gt;&lt;b&gt;Low Coupling:&lt;/b&gt; events.ts is the only shared contract. No cross-service imports." style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontFamily=Arial;fontSize=10;spacingLeft=6;spacingRight=6;spacingTop=6;" vertex="1" parent="1">
+      <mxGeometry x="26" y="86" width="218" height="218" as="geometry" />
+    </mxCell>
+
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <!-- NOTE 2 — WEBSOCKET EVENTS (top-right) -->
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <mxCell id="note2_bg" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFBEB;strokeColor=#CA8A04;strokeWidth=2;" vertex="1" parent="1">
+      <mxGeometry x="1410" y="80" width="220" height="200" as="geometry" />
+    </mxCell>
+    <mxCell id="note2" value="&lt;b&gt;WebSocket Events&lt;/b&gt;&lt;br/&gt;&lt;i&gt;shared/events.ts&lt;/i&gt;&lt;hr/&gt;emit: element:create&lt;br/&gt;emit: element:update&lt;br/&gt;emit: element:delete&lt;br/&gt;emit: cursor:move&lt;br/&gt;on ← user:join&lt;br/&gt;on ← user:leave&lt;br/&gt;on ← element:create&lt;br/&gt;on ← element:update" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontFamily=Arial;fontSize=10;spacingLeft=6;spacingTop=6;" vertex="1" parent="1">
+      <mxGeometry x="1416" y="86" width="208" height="188" as="geometry" />
+    </mxCell>
+
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <!-- NOTE 3 — REST API (far right) -->
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <mxCell id="note3_bg" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFBEB;strokeColor=#CA8A04;strokeWidth=2;" vertex="1" parent="1">
+      <mxGeometry x="1410" y="300" width="220" height="195" as="geometry" />
+    </mxCell>
+    <mxCell id="note3" value="&lt;b&gt;REST API Endpoints&lt;/b&gt;&lt;hr/&gt;POST   /api/rooms&lt;br/&gt;GET    /api/rooms/:code&lt;br/&gt;POST   /api/scenes&lt;br/&gt;GET    /api/scenes/:id&lt;br/&gt;PUT    /api/scenes/:id&lt;br/&gt;DELETE /api/scenes/:id&lt;br/&gt;GET    /health&lt;br/&gt;GET    /api/relay/health" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontFamily=Arial;fontSize=10;spacingLeft=6;spacingTop=6;" vertex="1" parent="1">
+      <mxGeometry x="1416" y="306" width="208" height="183" as="geometry" />
+    </mxCell>
+
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <!-- NOTE 4 — DESIGN DECISIONS (bottom-left) -->
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <mxCell id="note4_bg" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFBEB;strokeColor=#CA8A04;strokeWidth=2;" vertex="1" parent="1">
+      <mxGeometry x="20" y="330" width="230" height="175" as="geometry" />
+    </mxCell>
+    <mxCell id="note4" value="&lt;b&gt;5 Key Design Decisions&lt;/b&gt;&lt;hr/&gt;&lt;b&gt;D1:&lt;/b&gt; Relay split from Backend&lt;br/&gt;&lt;b&gt;D2:&lt;/b&gt; Offline-first IndexedDB&lt;br/&gt;&lt;b&gt;D3:&lt;/b&gt; Shared events.ts constants&lt;br/&gt;&lt;b&gt;D4:&lt;/b&gt; Nginx single entry point&lt;br/&gt;&lt;b&gt;D5:&lt;/b&gt; Repository pattern for DB&lt;br/&gt;&lt;br/&gt;&lt;i&gt;Each decision explained in&lt;br/&gt;Section 4 of the SDD.&lt;/i&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontFamily=Arial;fontSize=10;spacingLeft=6;spacingTop=6;" vertex="1" parent="1">
+      <mxGeometry x="26" y="336" width="218" height="163" as="geometry" />
+    </mxCell>
+
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <!-- LAYER 0 — USERS -->
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <mxCell id="l0_bg" value="&lt;b&gt;Users&lt;/b&gt;" style="swimlane;startSize=28;fillColor=#F1F5F9;strokeColor=#94A3B8;strokeWidth=2;fontFamily=Arial;fontSize=11;fontStyle=1;rounded=1;" vertex="1" parent="1">
+      <mxGeometry x="280" y="80" width="400" height="80" as="geometry" />
+    </mxCell>
+    <mxCell id="ua" value="&lt;b&gt;User A&lt;/b&gt;&lt;br/&gt;(Creator)" style="shape=mxgraph.basic.person;fillColor=#1A56DB;strokeColor=#1E3A5F;fontColor=#FFFFFF;fontFamily=Arial;fontSize=10;fontStyle=1;" vertex="1" parent="l0_bg">
+      <mxGeometry x="30" y="30" width="60" height="35" as="geometry" />
+    </mxCell>
+    <mxCell id="ub" value="&lt;b&gt;User B&lt;/b&gt;&lt;br/&gt;(Collaborator)" style="shape=mxgraph.basic.person;fillColor=#7C3AED;strokeColor=#4C1D95;fontColor=#FFFFFF;fontFamily=Arial;fontSize=10;fontStyle=1;" vertex="1" parent="l0_bg">
+      <mxGeometry x="170" y="30" width="60" height="35" as="geometry" />
+    </mxCell>
+    <mxCell id="uc" value="&lt;b&gt;User C&lt;/b&gt;&lt;br/&gt;(Viewer)" style="shape=mxgraph.basic.person;fillColor=#0EA5E9;strokeColor=#075985;fontColor=#FFFFFF;fontFamily=Arial;fontSize=10;fontStyle=1;" vertex="1" parent="l0_bg">
+      <mxGeometry x="310" y="30" width="60" height="35" as="geometry" />
+    </mxCell>
+
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <!-- LAYER 1 — PRESENTATION (Browser / React SPA) -->
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <mxCell id="l1_bg" value="&lt;b&gt;L1 — Presentation  [Browser / React SPA + TypeScript + Vite]&lt;/b&gt;" style="swimlane;startSize=28;fillColor=#DBEAFE;strokeColor=#1A56DB;strokeWidth=2;fontFamily=Arial;fontSize=11;fontStyle=1;rounded=1;" vertex="1" parent="1">
+      <mxGeometry x="280" y="200" width="900" height="120" as="geometry" />
+    </mxCell>
+    <mxCell id="fc" value="&lt;b&gt;Feature: Canvas&lt;/b&gt;&lt;br/&gt;src/features/canvas/" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EFF6FF;strokeColor=#1A56DB;strokeWidth=2;fontFamily=Arial;fontSize=10;" vertex="1" parent="l1_bg">
+      <mxGeometry x="20" y="38" width="160" height="60" as="geometry" />
+    </mxCell>
+    <mxCell id="fcol" value="&lt;b&gt;Feature: Collab&lt;/b&gt;&lt;br/&gt;src/features/collab/" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EFF6FF;strokeColor=#1A56DB;strokeWidth=2;fontFamily=Arial;fontSize=10;" vertex="1" parent="l1_bg">
+      <mxGeometry x="200" y="38" width="160" height="60" as="geometry" />
+    </mxCell>
+    <mxCell id="fexp" value="&lt;b&gt;Feature: Export&lt;/b&gt;&lt;br/&gt;src/features/export/" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EFF6FF;strokeColor=#1A56DB;strokeWidth=2;fontFamily=Arial;fontSize=10;" vertex="1" parent="l1_bg">
+      <mxGeometry x="380" y="38" width="160" height="60" as="geometry" />
+    </mxCell>
+    <mxCell id="flib" value="&lt;b&gt;Feature: Library&lt;/b&gt;&lt;br/&gt;src/features/library/" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EFF6FF;strokeColor=#1A56DB;strokeWidth=2;fontFamily=Arial;fontSize=10;" vertex="1" parent="l1_bg">
+      <mxGeometry x="560" y="38" width="160" height="60" as="geometry" />
+    </mxCell>
+    <mxCell id="ev_const" value="&lt;b&gt;shared/events.ts&lt;/b&gt;&lt;br/&gt;[WS Constants — Single Source]" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FEF9C3;strokeColor=#CA8A04;strokeWidth=2;fontFamily=Arial;fontSize=10;" vertex="1" parent="l1_bg">
+      <mxGeometry x="730" y="38" width="150" height="60" as="geometry" />
+    </mxCell>
+
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <!-- LAYER 2 — APPLICATION (Hooks + Services) -->
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <mxCell id="l2_bg" value="&lt;b&gt;L2 — Application  [React Hooks + Client Services — Abstraction Layer]&lt;/b&gt;" style="swimlane;startSize=28;fillColor=#DBEAFE;strokeColor=#1A56DB;strokeWidth=2;fontFamily=Arial;fontSize=11;fontStyle=1;rounded=1;" vertex="1" parent="1">
+      <mxGeometry x="280" y="360" width="900" height="120" as="geometry" />
+    </mxCell>
+    <mxCell id="hws" value="&lt;b&gt;useCollabSocket()&lt;/b&gt;&lt;br/&gt;Abstracts Socket.IO" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EFF6FF;strokeColor=#1A56DB;strokeWidth=2;fontFamily=Arial;fontSize=10;" vertex="1" parent="l2_bg">
+      <mxGeometry x="20" y="38" width="130" height="60" as="geometry" />
+    </mxCell>
+    <mxCell id="hsm" value="&lt;b&gt;useSceneManager()&lt;/b&gt;&lt;br/&gt;Scene CRUD + Sync" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EFF6FF;strokeColor=#1A56DB;strokeWidth=2;fontFamily=Arial;fontSize=10;" vertex="1" parent="l2_bg">
+      <mxGeometry x="165" y="38" width="130" height="60" as="geometry" />
+    </mxCell>
+    <mxCell id="apc" value="&lt;b&gt;apiClient&lt;/b&gt;&lt;br/&gt;Abstracts fetch()" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EFF6FF;strokeColor=#1A56DB;strokeWidth=2;fontFamily=Arial;fontSize=10;" vertex="1" parent="l2_bg">
+      <mxGeometry x="310" y="38" width="130" height="60" as="geometry" />
+    </mxCell>
+    <mxCell id="ss" value="&lt;b&gt;StorageService&lt;/b&gt;&lt;br/&gt;Abstracts IndexedDB" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EFF6FF;strokeColor=#1A56DB;strokeWidth=2;fontFamily=Arial;fontSize=10;" vertex="1" parent="l2_bg">
+      <mxGeometry x="455" y="38" width="130" height="60" as="geometry" />
+    </mxCell>
+    <mxCell id="cr" value="&lt;b&gt;CanvasRenderer&lt;/b&gt;&lt;br/&gt;Abstracts Canvas2D" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EFF6FF;strokeColor=#1A56DB;strokeWidth=2;fontFamily=Arial;fontSize=10;" vertex="1" parent="l2_bg">
+      <mxGeometry x="600" y="38" width="130" height="60" as="geometry" />
+    </mxCell>
+    <mxCell id="exsvc" value="&lt;b&gt;ExportService&lt;/b&gt;&lt;br/&gt;PNG / SVG / JSON" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EFF6FF;strokeColor=#1A56DB;strokeWidth=2;fontFamily=Arial;fontSize=10;" vertex="1" parent="l2_bg">
+      <mxGeometry x="745" y="38" width="130" height="60" as="geometry" />
+    </mxCell>
+
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <!-- LAYER 3 — API GATEWAY (Nginx) -->
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <mxCell id="l3_bg" value="&lt;b&gt;L3 — API Gateway  [Nginx Reverse Proxy :80 / :443]  —  D4: Single Entry Point&lt;/b&gt;" style="swimlane;startSize=28;fillColor=#FFF1F2;strokeColor=#DC2626;strokeWidth=2;fontFamily=Arial;fontSize=11;fontStyle=1;rounded=1;" vertex="1" parent="1">
+      <mxGeometry x="280" y="520" width="900" height="110" as="geometry" />
+    </mxCell>
+    <mxCell id="rfe" value="&lt;b&gt;Route: /&lt;/b&gt;&lt;br/&gt;→ frontend:3000&lt;br/&gt;(Static SPA files)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFE4E6;strokeColor=#DC2626;strokeWidth=2;fontFamily=Arial;fontSize=10;" vertex="1" parent="l3_bg">
+      <mxGeometry x="50" y="36" width="170" height="55" as="geometry" />
+    </mxCell>
+    <mxCell id="rapi" value="&lt;b&gt;Route: /api/*&lt;/b&gt;&lt;br/&gt;→ backend:8080&lt;br/&gt;(REST API)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFE4E6;strokeColor=#DC2626;strokeWidth=2;fontFamily=Arial;fontSize=10;" vertex="1" parent="l3_bg">
+      <mxGeometry x="300" y="36" width="170" height="55" as="geometry" />
+    </mxCell>
+    <mxCell id="rws" value="&lt;b&gt;Route: /ws/*&lt;/b&gt;&lt;br/&gt;→ relay:4000&lt;br/&gt;(WebSocket)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFE4E6;strokeColor=#DC2626;strokeWidth=2;fontFamily=Arial;fontSize=10;" vertex="1" parent="l3_bg">
+      <mxGeometry x="550" y="36" width="170" height="55" as="geometry" />
+    </mxCell>
+    <mxCell id="ssl" value="&lt;b&gt;SSL Termination&lt;/b&gt;&lt;br/&gt;ACM / Let's Encrypt&lt;br/&gt;(TLS cert)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFE4E6;strokeColor=#DC2626;strokeWidth=2;fontFamily=Arial;fontSize=10;" vertex="1" parent="l3_bg">
+      <mxGeometry x="700" y="36" width="170" height="55" as="geometry" />
+    </mxCell>
+
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <!-- LAYER 4a — BUSINESS LOGIC (Backend) -->
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <mxCell id="l4a_bg" value="&lt;b&gt;L4a — Business Logic  [Node.js + Express :8080]  —  Layered: Router → Service&lt;/b&gt;" style="swimlane;startSize=28;fillColor=#DBEAFE;strokeColor=#1A56DB;strokeWidth=2;fontFamily=Arial;fontSize=11;fontStyle=1;rounded=1;" vertex="1" parent="1">
+      <mxGeometry x="280" y="670" width="580" height="120" as="geometry" />
+    </mxCell>
+    <mxCell id="mw" value="&lt;b&gt;CORS + Auth&lt;/b&gt;&lt;br/&gt;Middleware&lt;br/&gt;[JWT Verify]" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EFF6FF;strokeColor=#1A56DB;strokeWidth=2;fontFamily=Arial;fontSize=10;" vertex="1" parent="l4a_bg">
+      <mxGeometry x="20" y="38" width="115" height="62" as="geometry" />
+    </mxCell>
+    <mxCell id="rts" value="&lt;b&gt;Scene Router&lt;/b&gt;&lt;br/&gt;/api/scenes" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EFF6FF;strokeColor=#1A56DB;strokeWidth=2;fontFamily=Arial;fontSize=10;" vertex="1" parent="l4a_bg">
+      <mxGeometry x="153" y="38" width="115" height="62" as="geometry" />
+    </mxCell>
+    <mxCell id="rtr" value="&lt;b&gt;Room Router&lt;/b&gt;&lt;br/&gt;/api/rooms" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EFF6FF;strokeColor=#1A56DB;strokeWidth=2;fontFamily=Arial;fontSize=10;" vertex="1" parent="l4a_bg">
+      <mxGeometry x="286" y="38" width="115" height="62" as="geometry" />
+    </mxCell>
+    <mxCell id="svs" value="&lt;b&gt;SceneService&lt;/b&gt;&lt;br/&gt;Business Rules&lt;br/&gt;(High Cohesion)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EFF6FF;strokeColor=#1A56DB;strokeWidth=2;fontFamily=Arial;fontSize=10;" vertex="1" parent="l4a_bg">
+      <mxGeometry x="419" y="38" width="115" height="62" as="geometry" />
+    </mxCell>
+    <mxCell id="svr" value="&lt;b&gt;RoomService&lt;/b&gt;&lt;br/&gt;Room Code Gen&lt;br/&gt;(High Cohesion)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EFF6FF;strokeColor=#1A56DB;strokeWidth=2;fontFamily=Arial;fontSize=10;" vertex="1" parent="l4a_bg">
+      <mxGeometry x="452" y="38" width="115" height="62" as="geometry" />
+    </mxCell>
+
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <!-- LAYER 4b — REAL-TIME (Relay) -->
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <mxCell id="l4b_bg" value="&lt;b&gt;L4b — Real-Time  [Node.js + Socket.IO :4000]  —  D1: Relay separate from Backend&lt;/b&gt;" style="swimlane;startSize=28;fillColor=#DBEAFE;strokeColor=#1A56DB;strokeWidth=2;fontFamily=Arial;fontSize=11;fontStyle=1;rounded=1;" vertex="1" parent="1">
+      <mxGeometry x="890" y="670" width="530" height="120" as="geometry" />
+    </mxCell>
+    <mxCell id="eb" value="&lt;b&gt;EventBroker&lt;/b&gt;&lt;br/&gt;Broadcast to room&lt;br/&gt;members" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EFF6FF;strokeColor=#1A56DB;strokeWidth=2;fontFamily=Arial;fontSize=10;" vertex="1" parent="l4b_bg">
+      <mxGeometry x="20" y="38" width="120" height="62" as="geometry" />
+    </mxCell>
+    <mxCell id="rm" value="&lt;b&gt;RoomManager&lt;/b&gt;&lt;br/&gt;Join / Leave&lt;br/&gt;/ List rooms" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EFF6FF;strokeColor=#1A56DB;strokeWidth=2;fontFamily=Arial;fontSize=10;" vertex="1" parent="l4b_bg">
+      <mxGeometry x="160" y="38" width="120" height="62" as="geometry" />
+    </mxCell>
+    <mxCell id="pt" value="&lt;b&gt;PresenceTracker&lt;/b&gt;&lt;br/&gt;Active users&lt;br/&gt;per room" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EFF6FF;strokeColor=#1A56DB;strokeWidth=2;fontFamily=Arial;fontSize=10;" vertex="1" parent="l4b_bg">
+      <mxGeometry x="300" y="38" width="120" height="62" as="geometry" />
+    </mxCell>
+    <mxCell id="ra" value="&lt;b&gt;RedisAdapter&lt;/b&gt;&lt;br/&gt;socket.io-redis&lt;br/&gt;(PubSub bus)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EFF6FF;strokeColor=#1A56DB;strokeWidth=2;fontFamily=Arial;fontSize=10;" vertex="1" parent="l4b_bg">
+      <mxGeometry x="390" y="38" width="120" height="62" as="geometry" />
+    </mxCell>
+
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <!-- LAYER 5 — DATA ACCESS (Repository Pattern) -->
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <mxCell id="l5_bg" value="&lt;b&gt;L5 — Data Access  [Repository Pattern — D5: No raw SQL in business logic]&lt;/b&gt;" style="swimlane;startSize=28;fillColor=#F0FDF4;strokeColor=#16A34A;strokeWidth=2;fontFamily=Arial;fontSize=11;fontStyle=1;rounded=1;" vertex="1" parent="1">
+      <mxGeometry x="280" y="830" width="900" height="110" as="geometry" />
+    </mxCell>
+    <mxCell id="rsc" value="&lt;b&gt;SceneRepository&lt;/b&gt;&lt;br/&gt;findById()&lt;br/&gt;save() · delete()" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCFCE7;strokeColor=#16A34A;strokeWidth=2;fontFamily=Arial;fontSize=10;" vertex="1" parent="l5_bg">
+      <mxGeometry x="40" y="36" width="150" height="55" as="geometry" />
+    </mxCell>
+    <mxCell id="rrm" value="&lt;b&gt;RoomRepository&lt;/b&gt;&lt;br/&gt;findByCode()&lt;br/&gt;create() · expire()" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCFCE7;strokeColor=#16A34A;strokeWidth=2;fontFamily=Arial;fontSize=10;" vertex="1" parent="l5_bg">
+      <mxGeometry x="220" y="36" width="150" height="55" as="geometry" />
+    </mxCell>
+    <mxCell id="pgc" value="&lt;b&gt;PGClient&lt;/b&gt;&lt;br/&gt;node-postgres&lt;br/&gt;pool wrapper" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCFCE7;strokeColor=#16A34A;strokeWidth=2;fontFamily=Arial;fontSize=10;" vertex="1" parent="l5_bg">
+      <mxGeometry x="400" y="36" width="150" height="55" as="geometry" />
+    </mxCell>
+    <mxCell id="rcl" value="&lt;b&gt;RedisClient&lt;/b&gt;&lt;br/&gt;ioredis wrapper&lt;br/&gt;(session + cache)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCFCE7;strokeColor=#16A34A;strokeWidth=2;fontFamily=Arial;fontSize=10;" vertex="1" parent="l5_bg">
+      <mxGeometry x="580" y="36" width="150" height="55" as="geometry" />
+    </mxCell>
+    <mxCell id="idb" value="&lt;b&gt;IndexedDB&lt;/b&gt;&lt;br/&gt;Browser offline&lt;br/&gt;(D2: Offline-first)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FEF9C3;strokeColor=#CA8A04;strokeWidth=2;fontFamily=Arial;fontSize=10;" vertex="1" parent="l5_bg">
+      <mxGeometry x="730" y="36" width="150" height="55" as="geometry" />
+    </mxCell>
+
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <!-- LAYER 6 — PERSISTENCE -->
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <mxCell id="l6_bg" value="&lt;b&gt;L6 — Persistence  [Docker Containers + Named Volumes]&lt;/b&gt;" style="swimlane;startSize=28;fillColor=#F0FDF4;strokeColor=#16A34A;strokeWidth=2;fontFamily=Arial;fontSize=11;fontStyle=1;rounded=1;" vertex="1" parent="1">
+      <mxGeometry x="280" y="980" width="900" height="110" as="geometry" />
+    </mxCell>
+    <mxCell id="pg" value="&lt;b&gt;PostgreSQL 15&lt;/b&gt;&lt;br/&gt;:5432&lt;br/&gt;scenes · rooms · users&lt;br/&gt;[volume: postgres_data]" style="shape=mxgraph.flowchart.database;whiteSpace=wrap;html=1;fillColor=#DCFCE7;strokeColor=#16A34A;strokeWidth=2;fontFamily=Arial;fontSize=10;" vertex="1" parent="l6_bg">
+      <mxGeometry x="100" y="28" width="160" height="70" as="geometry" />
+    </mxCell>
+    <mxCell id="rd" value="&lt;b&gt;Redis 7&lt;/b&gt;&lt;br/&gt;:6379&lt;br/&gt;Sessions · Room State&lt;br/&gt;PubSub · [volume: redis_data]" style="shape=mxgraph.flowchart.database;whiteSpace=wrap;html=1;fillColor=#FEF2F2;strokeColor=#DC2626;strokeWidth=2;fontFamily=Arial;fontSize=10;" vertex="1" parent="l6_bg">
+      <mxGeometry x="380" y="28" width="160" height="70" as="geometry" />
+    </mxCell>
+    <mxCell id="idb2" value="&lt;b&gt;IndexedDB&lt;/b&gt;&lt;br/&gt;Browser Storage&lt;br/&gt;Auto-save every change&lt;br/&gt;[D2: Offline-first]" style="shape=mxgraph.flowchart.database;whiteSpace=wrap;html=1;fillColor=#FEF9C3;strokeColor=#CA8A04;strokeWidth=2;fontFamily=Arial;fontSize=10;" vertex="1" parent="l6_bg">
+      <mxGeometry x="650" y="28" width="160" height="70" as="geometry" />
+    </mxCell>
+
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <!-- LAYER 7 — INFRASTRUCTURE -->
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <mxCell id="l7_bg" value="&lt;b&gt;L7 — Infrastructure  [Docker Compose Orchestration + AWS EC2 Production]&lt;/b&gt;" style="swimlane;startSize=28;fillColor=#FFF7ED;strokeColor=#EA580C;strokeWidth=2;fontFamily=Arial;fontSize=11;fontStyle=1;rounded=1;" vertex="1" parent="1">
+      <mxGeometry x="280" y="1130" width="900" height="110" as="geometry" />
+    </mxCell>
+    <mxCell id="ca" value="&lt;b&gt;collabedge-app&lt;/b&gt;&lt;br/&gt;nginx:alpine&lt;br/&gt;port 3000" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFEDD5;strokeColor=#EA580C;strokeWidth=2;fontFamily=Arial;fontSize=10;" vertex="1" parent="l7_bg">
+      <mxGeometry x="20" y="36" width="130" height="55" as="geometry" />
+    </mxCell>
+    <mxCell id="cs" value="&lt;b&gt;collabedge-server&lt;/b&gt;&lt;br/&gt;node:20-alpine&lt;br/&gt;port 8080" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFEDD5;strokeColor=#EA580C;strokeWidth=2;fontFamily=Arial;fontSize=10;" vertex="1" parent="l7_bg">
+      <mxGeometry x="170" y="36" width="130" height="55" as="geometry" />
+    </mxCell>
+    <mxCell id="cr2" value="&lt;b&gt;collabedge-relay&lt;/b&gt;&lt;br/&gt;node:20-alpine&lt;br/&gt;port 4000" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFEDD5;strokeColor=#EA580C;strokeWidth=2;fontFamily=Arial;fontSize=10;" vertex="1" parent="l7_bg">
+      <mxGeometry x="320" y="36" width="130" height="55" as="geometry" />
+    </mxCell>
+    <mxCell id="cpg" value="&lt;b&gt;postgres:15-alpine&lt;/b&gt;&lt;br/&gt;port 5432&lt;br/&gt;volume: postgres_data" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFEDD5;strokeColor=#EA580C;strokeWidth=2;fontFamily=Arial;fontSize=10;" vertex="1" parent="l7_bg">
+      <mxGeometry x="470" y="36" width="130" height="55" as="geometry" />
+    </mxCell>
+    <mxCell id="crd" value="&lt;b&gt;redis:7-alpine&lt;/b&gt;&lt;br/&gt;port 6379&lt;br/&gt;volume: redis_data" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFEDD5;strokeColor=#EA580C;strokeWidth=2;fontFamily=Arial;fontSize=10;" vertex="1" parent="l7_bg">
+      <mxGeometry x="620" y="36" width="130" height="55" as="geometry" />
+    </mxCell>
+    <mxCell id="gh" value="&lt;b&gt;GitHub Actions&lt;/b&gt;&lt;br/&gt;lint→test→build&lt;br/&gt;→deploy CI/CD" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFEDD5;strokeColor=#EA580C;strokeWidth=2;fontFamily=Arial;fontSize=10;" vertex="1" parent="l7_bg">
+      <mxGeometry x="760" y="36" width="120" height="55" as="geometry" />
+    </mxCell>
+
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <!-- LEGEND -->
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <mxCell id="leg_bg" value="&lt;b&gt;Legend&lt;/b&gt;" style="swimlane;startSize=24;fillColor=#F8FAFC;strokeColor=#94A3B8;strokeWidth=2;fontFamily=Arial;fontSize=11;fontStyle=1;rounded=1;" vertex="1" parent="1">
+      <mxGeometry x="20" y="540" width="230" height="290" as="geometry" />
+    </mxCell>
+    <mxCell id="leg1" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DBEAFE;strokeColor=#1A56DB;strokeWidth=2;" vertex="1" parent="leg_bg">
+      <mxGeometry x="10" y="34" width="20" height="16" as="geometry" />
+    </mxCell>
+    <mxCell id="leg1t" value="App / Logic Services" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontFamily=Arial;fontSize=10;" vertex="1" parent="leg_bg">
+      <mxGeometry x="36" y="34" width="180" height="16" as="geometry" />
+    </mxCell>
+    <mxCell id="leg2" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F0FDF4;strokeColor=#16A34A;strokeWidth=2;" vertex="1" parent="leg_bg">
+      <mxGeometry x="10" y="58" width="20" height="16" as="geometry" />
+    </mxCell>
+    <mxCell id="leg2t" value="Data Access / Persistence" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontFamily=Arial;fontSize=10;" vertex="1" parent="leg_bg">
+      <mxGeometry x="36" y="58" width="180" height="16" as="geometry" />
+    </mxCell>
+    <mxCell id="leg3" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF7ED;strokeColor=#EA580C;strokeWidth=2;" vertex="1" parent="leg_bg">
+      <mxGeometry x="10" y="82" width="20" height="16" as="geometry" />
+    </mxCell>
+    <mxCell id="leg3t" value="Infrastructure (Docker / EC2)" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontFamily=Arial;fontSize=10;" vertex="1" parent="leg_bg">
+      <mxGeometry x="36" y="82" width="180" height="16" as="geometry" />
+    </mxCell>
+    <mxCell id="leg4" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF1F2;strokeColor=#DC2626;strokeWidth=2;" vertex="1" parent="leg_bg">
+      <mxGeometry x="10" y="106" width="20" height="16" as="geometry" />
+    </mxCell>
+    <mxCell id="leg4t" value="Nginx API Gateway" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontFamily=Arial;fontSize=10;" vertex="1" parent="leg_bg">
+      <mxGeometry x="36" y="106" width="180" height="16" as="geometry" />
+    </mxCell>
+    <mxCell id="leg5" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FEF9C3;strokeColor=#CA8A04;strokeWidth=2;" vertex="1" parent="leg_bg">
+      <mxGeometry x="10" y="130" width="20" height="16" as="geometry" />
+    </mxCell>
+    <mxCell id="leg5t" value="Shared Contract / Offline" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontFamily=Arial;fontSize=10;" vertex="1" parent="leg_bg">
+      <mxGeometry x="36" y="130" width="180" height="16" as="geometry" />
+    </mxCell>
+    <mxCell id="leg_div" value="" style="line;strokeColor=#94A3B8;" vertex="1" parent="leg_bg">
+      <mxGeometry x="10" y="154" width="210" height="10" as="geometry" />
+    </mxCell>
+    <mxCell id="leg6t" value="——► HTTP / REST call" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontFamily=Arial;fontSize=10;fontColor=#1A56DB;" vertex="1" parent="leg_bg">
+      <mxGeometry x="10" y="166" width="210" height="16" as="geometry" />
+    </mxCell>
+    <mxCell id="leg7t" value="--► WebSocket (Socket.IO)" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontFamily=Arial;fontSize=10;fontColor=#7C3AED;" vertex="1" parent="leg_bg">
+      <mxGeometry x="10" y="186" width="210" height="16" as="geometry" />
+    </mxCell>
+    <mxCell id="leg8t" value="——► Internal layer call" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontFamily=Arial;fontSize=10;fontColor=#16A34A;" vertex="1" parent="leg_bg">
+      <mxGeometry x="10" y="206" width="210" height="16" as="geometry" />
+    </mxCell>
+    <mxCell id="leg9t" value="——► TCP / DB connection" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontFamily=Arial;fontSize=10;fontColor=#EA580C;" vertex="1" parent="leg_bg">
+      <mxGeometry x="10" y="226" width="210" height="16" as="geometry" />
+    </mxCell>
+    <mxCell id="leg10t" value="——► Deploy / Host" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontFamily=Arial;fontSize=10;fontColor=#CA8A04;" vertex="1" parent="leg_bg">
+      <mxGeometry x="10" y="246" width="210" height="16" as="geometry" />
+    </mxCell>
+
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <!-- ARROWS — Users to L1 -->
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <mxCell id="arr_u_l1" value="Browser" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeColor=#1A56DB;strokeWidth=2;fontFamily=Arial;fontSize=10;" edge="1" source="l0_bg" target="l1_bg" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- L1 to L2 -->
+    <mxCell id="arr_l1_l2" value="calls hooks/services" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#1A56DB;strokeWidth=2;fontFamily=Arial;fontSize=10;" edge="1" source="l1_bg" target="l2_bg" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- L2 apiClient to L3 /api -->
+    <mxCell id="arr_apc_l3" value="HTTPS /api/*" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#1A56DB;strokeWidth=2;fontFamily=Arial;fontSize=10;dashed=0;" edge="1" source="apc" target="rapi" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- L2 useCollabSocket to L3 /ws -->
+    <mxCell id="arr_hws_l3" value="WSS /ws/*" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#7C3AED;strokeWidth=2;dashed=1;fontFamily=Arial;fontSize=10;" edge="1" source="hws" target="rws" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- L2 StorageService to IndexedDB -->
+    <mxCell id="arr_ss_idb" value="read/write\n(D2: offline-first)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#CA8A04;strokeWidth=2;fontFamily=Arial;fontSize=10;" edge="1" source="ss" target="idb" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- L3 /api to L4a -->
+    <mxCell id="arr_rapi_l4a" value="REST calls" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#1A56DB;strokeWidth=2;fontFamily=Arial;fontSize=10;" edge="1" source="rapi" target="l4a_bg" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- L3 /ws to L4b -->
+    <mxCell id="arr_rws_l4b" value="WebSocket" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#7C3AED;strokeWidth=2;dashed=1;fontFamily=Arial;fontSize=10;" edge="1" source="rws" target="l4b_bg" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- L4a internal -->
+    <mxCell id="arr_mw_rts" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#16A34A;strokeWidth=1;fontFamily=Arial;fontSize=10;" edge="1" source="mw" target="rts" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+    <mxCell id="arr_mw_rtr" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#16A34A;strokeWidth=1;" edge="1" source="mw" target="rtr" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+    <mxCell id="arr_rts_svs" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#16A34A;strokeWidth=1;" edge="1" source="rts" target="svs" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+    <mxCell id="arr_rtr_svr" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#16A34A;strokeWidth=1;" edge="1" source="rtr" target="svr" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- L4b internal -->
+    <mxCell id="arr_eb_rm" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#16A34A;strokeWidth=1;" edge="1" source="eb" target="rm" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+    <mxCell id="arr_eb_pt" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#16A34A;strokeWidth=1;" edge="1" source="eb" target="pt" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+    <mxCell id="arr_eb_ra" value="pubsub" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#7C3AED;strokeWidth=1;dashed=1;fontFamily=Arial;fontSize=10;" edge="1" source="eb" target="ra" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- L4a to L5 -->
+    <mxCell id="arr_svs_rsc" value="injected (DI)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#16A34A;strokeWidth=2;fontFamily=Arial;fontSize=10;" edge="1" source="svs" target="rsc" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+    <mxCell id="arr_svr_rrm" value="injected (DI)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#16A34A;strokeWidth=2;fontFamily=Arial;fontSize=10;" edge="1" source="svr" target="rrm" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- L4b to L5 Redis -->
+    <mxCell id="arr_ra_rcl" value="TCP 6379" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#EA580C;strokeWidth=2;fontFamily=Arial;fontSize=10;" edge="1" source="ra" target="rcl" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- L5 to L6 -->
+    <mxCell id="arr_rsc_pgc" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#16A34A;strokeWidth=1;" edge="1" source="rsc" target="pgc" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+    <mxCell id="arr_rrm_pgc" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#16A34A;strokeWidth=1;" edge="1" source="rrm" target="pgc" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+    <mxCell id="arr_pgc_pg" value="TCP 5432" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#EA580C;strokeWidth=2;fontFamily=Arial;fontSize=10;" edge="1" source="pgc" target="pg" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+    <mxCell id="arr_rcl_rd" value="TCP 6379" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#EA580C;strokeWidth=2;fontFamily=Arial;fontSize=10;" edge="1" source="rcl" target="rd" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+    <mxCell id="arr_idb_idb2" value="browser storage" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#CA8A04;strokeWidth=2;fontFamily=Arial;fontSize=10;" edge="1" source="idb" target="idb2" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- L6 to L7 -->
+    <mxCell id="arr_l6_l7" value="hosted in containers" style="edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#EA580C;strokeWidth=2;fontFamily=Arial;fontSize=10;" edge="1" source="l6_bg" target="l7_bg" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+  </root>
+</mxGraphModel>
