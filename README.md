@@ -34,6 +34,39 @@
   </figure>
 </div>
 
+## Software Design
+
+### Architecture
+CollabEdge uses a three-service architecture (Frontend · Backend · Relay)
+with a Client-Server + Layered + Event-Driven hybrid style.
+All services are containerised with Docker Compose.
+
+![Architecture Diagram](docs/design/collabedge-architecture.png)
+
+### Design Summary
+Key design choices:
+- **Three-service split** — Relay separated from Backend for independent scaling
+- **Offline-first** — IndexedDB as primary write target; server sync is secondary
+- **Repository pattern** — all DB access through named repository methods
+- **Shared event constants** — single source of truth for WebSocket event names
+- **Nginx gateway** — single entry point; services not directly addressable
+
+### Wireframes
+Designed in Figma (medium-fidelity, black & white):
+| Screen | Preview |
+|--------|---------|
+| Landing / Room Entry | ![](docs/design/wireframes/screen-01.1-landing.png) |
+| Canvas Solo Mode | ![](docs/design/wireframes/screen-02-canvas-solo.png) |
+| Collaboration Mode | ![](docs/design/wireframes/screen-03-canvas-collab.png) |
+| Styling Sidebar | ![](docs/design/wireframes/screen-04-styling-sidebar.png) |
+| Export Modal | ![](docs/design/wireframes/screen-05.1-export-modal.png) |
+| Library Panel | ![](docs/design/wireframes/screen-06-library-panel.png) |
+
+> draw.io file (Architecture): https://drive.google.com/file/d/1vZWLs8BdGxQ6ozmbbAdyRYyQaS0DgcN6/view?usp=sharing
+
+### Full Design Document
+See [docs/design/CollabEdge_DA2_SoftwareDesign.pdf](docs/design/CollabEdge_DA2_SoftwareDesign.pdf)
+
 ## Features
 
 CollabEdge includes all the powerful Excalidraw features plus:
