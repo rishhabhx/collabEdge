@@ -41,7 +41,7 @@ CollabEdge uses a three-service architecture (Frontend · Backend · Relay)
 with a Client-Server + Layered + Event-Driven hybrid style.
 All services are containerised with Docker Compose.
 
-![Architecture Diagram](docs/design/collabedge-architecture.png)
+![Architecture Diagram](docs/design/collabedge-architecture-system-level.png)
 
 ### Design Summary
 Key design choices:
