@@ -4,7 +4,10 @@ import { useI18n } from "@excalidraw/excalidraw/i18n";
 import { WelcomeScreen } from "@excalidraw/excalidraw/index";
 import React from "react";
 
-import { isExcalidrawPlusSignedUser, HIDE_PLUS_REFERENCES } from "../app_constants";
+import {
+  isExcalidrawPlusSignedUser,
+  HIDE_PLUS_REFERENCES,
+} from "../app_constants";
 
 export const AppWelcomeScreen: React.FC<{
   onCollabDialogOpen: () => any;

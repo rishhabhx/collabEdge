@@ -1,7 +1,8 @@
-import { CSSProperties } from "react";
 import { VERSIONS } from "@excalidraw/common";
 
 import { t } from "../i18n";
+
+import type { CSSProperties } from "react";
 
 import type { ExcalidrawProps, UIAppState } from "../types";
 

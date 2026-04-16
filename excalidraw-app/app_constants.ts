@@ -60,4 +60,5 @@ export const isExcalidrawPlusSignedUser = document.cookie.includes(
 );
 
 // Environment flag to hide Plus/SaaS references
-export const HIDE_PLUS_REFERENCES = import.meta.env.VITE_HIDE_PLUS_REFERENCES === "true";
+export const HIDE_PLUS_REFERENCES =
+  import.meta.env.VITE_HIDE_PLUS_REFERENCES === "true";

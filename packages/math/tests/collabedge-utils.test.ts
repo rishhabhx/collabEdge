@@ -4,7 +4,11 @@
  * radiansToDegrees, and rangeInclusiveFromPair.
  */
 
-import { rangeInclusive, rangeIncludesValue, rangeInclusiveFromPair } from "../src/range";
+import {
+  rangeInclusive,
+  rangeIncludesValue,
+  rangeInclusiveFromPair,
+} from "../src/range";
 import {
   normalizeRadians,
   degreesToRadians,
@@ -142,6 +146,6 @@ describe("isRightAngleRads", () => {
     // π/4 = 45° → sin(π/2) = 1 → not a right-angle multiple
     expect(isRightAngleRads((Math.PI / 4) as Radians)).toBe(false);
     // π/3 = 60° → sin(2π/3) ≈ 0.866 → not a right-angle multiple
-    expect(isRightAngleRads(((Math.PI) / 3) as Radians)).toBe(false);
+    expect(isRightAngleRads((Math.PI / 3) as Radians)).toBe(false);
   });
 });
