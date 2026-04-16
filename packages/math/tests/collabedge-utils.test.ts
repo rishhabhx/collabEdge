@@ -12,7 +12,7 @@ import {
   isRightAngleRads,
 } from "../src/angle";
 
-import type { Radians } from "../src/types";
+import type { Degrees, Radians } from "../src/types";
 
 // ---------------------------------------------------------------------------
 // rangeIncludesValue
@@ -90,19 +90,19 @@ describe("normalizeRadians", () => {
 // ---------------------------------------------------------------------------
 describe("degreesToRadians", () => {
   it("converts 0° to 0 rad", () => {
-    expect(degreesToRadians(0 as never)).toBeCloseTo(0);
+    expect(degreesToRadians(0 as Degrees)).toBeCloseTo(0);
   });
 
   it("converts 90° to π/2 rad", () => {
-    expect(degreesToRadians(90 as never)).toBeCloseTo(Math.PI / 2);
+    expect(degreesToRadians(90 as Degrees)).toBeCloseTo(Math.PI / 2);
   });
 
   it("converts 180° to π rad", () => {
-    expect(degreesToRadians(180 as never)).toBeCloseTo(Math.PI);
+    expect(degreesToRadians(180 as Degrees)).toBeCloseTo(Math.PI);
   });
 
   it("converts 360° to 2π rad", () => {
-    expect(degreesToRadians(360 as never)).toBeCloseTo(2 * Math.PI);
+    expect(degreesToRadians(360 as Degrees)).toBeCloseTo(2 * Math.PI);
   });
 });
 
