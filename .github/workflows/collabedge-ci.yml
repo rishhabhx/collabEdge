@@ -1,0 +1,94 @@
+name: CollabEdge CI (All Services)
+
+on:
+  push:
+    branches: [main, feature/da3-testing-suite]
+  pull_request:
+    branches: [main]
+
+jobs:
+  # ---------------------------------------------------------------------------
+  # Job 1 — collabedge-relay integration tests
+  # ---------------------------------------------------------------------------
+  test-relay:
+    name: Relay Server Tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          repository: rishhabhx/collabEdge-relayBackend
+          ref: feature/da3-testing-suite
+          path: collabedge-relay
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "18"
+      - name: Install relay dependencies
+        working-directory: collabedge-relay
+        run: npm ci --legacy-peer-deps
+      - name: Run relay Jest tests
+        working-directory: collabedge-relay
+        run: npm test
+
+  # ---------------------------------------------------------------------------
+  # Job 2 — collabedge-ai integration tests
+  # ---------------------------------------------------------------------------
+  test-ai:
+    name: AI Backend Tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          repository: rishhabhx/collabEdge-aiBackend
+          ref: feature/da3-testing-suite
+          path: collabedge-ai
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "18"
+      - name: Install AI dependencies
+        working-directory: collabedge-ai
+        run: npm ci
+      - name: Run AI Jest + Supertest tests
+        working-directory: collabedge-ai
+        run: npm test
+
+  # ---------------------------------------------------------------------------
+  # Job 3 — collabedge-app Vitest frontend tests
+  # ---------------------------------------------------------------------------
+  test-frontend:
+    name: Frontend Tests (Vitest)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "18"
+      - name: Install frontend dependencies
+        run: yarn install --frozen-lockfile
+      - name: Run Vitest
+        run: yarn test --run
+        env:
+          CI: true
+
+  # ---------------------------------------------------------------------------
+  # Job 4 — Stryker mutation testing (runs after relay tests pass)
+  # ---------------------------------------------------------------------------
+  mutation-relay:
+    name: Mutation Tests (Relay)
+    runs-on: ubuntu-latest
+    needs: test-relay
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          repository: rishhabhx/collabEdge-relayBackend
+          ref: feature/da3-testing-suite
+          path: collabedge-relay
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "18"
+      - name: Install relay dependencies
+        working-directory: collabedge-relay
+        run: npm ci --legacy-peer-deps
+      - name: Run Stryker mutation tests
+        working-directory: collabedge-relay
+        run: npm run mutation
+        continue-on-error: true
